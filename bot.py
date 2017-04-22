@@ -94,7 +94,7 @@ class IrcBot:
         self.socket = IrcSocket(socket.AF_INET, socket.SOCK_STREAM)
         self.queue = queue.Queue()
         self.reciver = ReciverThread(self.socket, self.queue)
-        self.reciver.daemon = False
+        self.reciver.daemon = True
 
     def start(self):
         self.socket.connect((HOST, PORT))

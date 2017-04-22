@@ -80,7 +80,7 @@ class IrcSocket(socket.socket):
 
 class ReciverThread(threading.Thread):
     def __init__(self, socket, queue):
-        threading.Thread.__init__(self)
+        super().__init__()
         self.socket = socket
         self.queue = queue
 

@@ -29,9 +29,8 @@ def handle_JOIN(bot):
     if nick in OPS:
         bot.send("MODE %s +o %s" % (bot.params, nick))
     else:
-        if nick == NICK:
-            return
-        bot.send_msg(bot.params, "Cześć %s!" % nick)
+        if nick != NICK:
+            bot.send_msg(bot.params, "Cześć %s!" % nick)
 
 def handle_PRIVMSG(bot):
     chan, msg = bot.params.split(" ", 1)
@@ -95,7 +94,7 @@ class IrcBot:
         self.socket = IrcSocket(socket.AF_INET, socket.SOCK_STREAM)
         self.queue = queue.Queue()
         self.reciver = ReciverThread(self.socket, self.queue)
-        self.reciver.deamon = False
+        self.reciver.daemon = False
 
     def start(self):
         self.socket.connect((HOST, PORT))
